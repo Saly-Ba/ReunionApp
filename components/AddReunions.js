@@ -7,13 +7,10 @@ import firebase from '../firebase';
 
 const { heigh, width } = Dimensions.get('window');
 
-let count = 5;
 
 export function addReunionDb(sujet,lieu,participants,date){
     dateTime = date.toGMTString();
-    firebase.database().ref('reunion/00'+count).set({sujet,lieu,participants,dateTime});
-
-    count++;
+    firebase.database().ref('/reunion').push({sujet,lieu,participants,dateTime});
   }
 
 const AddReunions = ({ navigation }) => {
