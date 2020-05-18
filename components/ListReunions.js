@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, FlatList, TouchableHighlight } from 'react-native';
 import firebase from '../firebase';
 import { Icon } from 'react-native-elements';
+import Toast from 'react-native-simple-toast';
 import _ from 'lodash';
 
 
@@ -41,10 +42,10 @@ export default function ListReunions({navigation}){
                                             <Text style={styles.textCard}>{item.participants}</Text>
                                         </View>
                                         <View>
-                                            <Icon name='close'
+                                            <Icon name='delete'
                                                 //reverse
                                                 //raised
-                                                color='black'
+                                                color='red'
                                                 type='material'
                                                 size={30}
                                                 onPress={()=>{deleteReunion(item.key)}}
@@ -55,7 +56,8 @@ export default function ListReunions({navigation}){
                             </View>
                         )
                     }}
-                />
+                />  
+            </View>
             <Icon
                 reverse
                 raised
@@ -66,9 +68,17 @@ export default function ListReunions({navigation}){
                 size={40}
                 containerStyle={styles.addButton}
                 onPress={()=>{navigation.navigate("Ajouter une Reunion")}}
-            />    
-            </View>
-            <TouchableOpacity onPress={getReunion} style={styles.refresh}><Text style={{color:'white'}}>Click me!</Text></TouchableOpacity>
+            /> 
+            <Icon
+                reverse
+                raised
+                name='refresh'
+                type='material'
+                color='#006064'
+                //iconStyle={{width:100}}
+                size={30}
+                onPress={getReunion}
+            />  
             
         </View>
     );
@@ -84,10 +94,9 @@ const styles = StyleSheet.create({
     },
     card:{
         flex:1, 
-        elevation:8,
         borderRadius:20,
         backgroundColor:'#00acc1',
-        padding:15,
+        padding:20,
         marginBottom:20,
         width: '100%',
     },
@@ -97,15 +106,6 @@ const styles = StyleSheet.create({
     },
     textCard:{
         color:'white',
-    },
-    refresh:{
-        marginTop: 20,
-        backgroundColor:'#006064',
-        width: 150,
-        height: 60,
-        borderRadius: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
     },
     addButton:{
         position: 'absolute',

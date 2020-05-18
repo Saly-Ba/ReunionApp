@@ -9,7 +9,7 @@ const { heigh, width } = Dimensions.get('window');
 
 
 export function addReunionDb(sujet,lieu,participants,date){
-    dateTime = date.toGMTString();
+    const dateTime = date.toGMTString();
     firebase.database().ref('/reunion').push({sujet,lieu,participants,dateTime});
   }
 
@@ -107,7 +107,7 @@ const AddReunions = ({ navigation }) => {
             
             <TouchableOpacity style = {styles.button} onPress={()=>{
                   addReunionDb(sujet,lieu,chipsd,date)
-                  setDate(new Date());
+                  //setDate(new Date());
                   setLieu('');
                   setSujet('');
                   setChips([]);
